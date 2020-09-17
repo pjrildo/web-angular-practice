@@ -1,22 +1,20 @@
-<!DOCTYPE html>
-<html>
-    <title>W3.CSS</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
-    <div class="w3-container">
-        <h2>Exemplo de Card</h2>
-        <div class="w3-card-4 w3-dark-grey" style="width:50%">
-            <div class="w3-container w3-center">
-                <h3>Friend Request</h3>
-                <img src="assets/img/img_avatar3.png" alt="Avatar" style="width:80%">
-                <h5>John Doe</h5>
-                <div class="w3-section">
-                    <button class="w3-button w3-green">Aceitar</button>
-                    <button class="w3-button w3-red">Recusar</button>
-                </div>
+    <div class="container">
+        <h2>Perfil de {{ usuario }}</h2>
+        <h3>Profissão: {{ profissao }}</h3>
+        <div *ngIf="exibe" class="card" style="width:400px">
+            <img class="card-img-top" [src]="imagem" alt="Avatar" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">{{ usuario }}</h4>
+                <p class="card-text">{{ descricao }}</p>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="vertical-center">
+                <a href="#" (click)="exibirPerfil()" class="btn btn-outline-primary">Exibir perfil</a>
+                <a href="#" (click)="ocultarPerfil()" class="btn btn-outline-danger">Ocultar perfil</a>
             </div>
         </div>
     </div>
 </body>
-</html>
