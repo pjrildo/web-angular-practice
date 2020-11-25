@@ -2,19 +2,23 @@
     <div class="container">
         <h2>Perfil de {{ usuario }}</h2>
         <h3>Profissão: {{ profissao }}</h3>
+
         <div *ngIf="exibe" class="card" style="width:400px">
-            <img class="card-img-top" [src]="imagem" alt="Avatar" style="width:100%">
+            <img class="card-img-top" [src]="imagem" alt="Avatar" style="width:70%">
+            
             <div class="card-body">
                 <h4 class="card-title">{{ usuario }}</h4>
                 <p class="card-text">{{ descricao }}</p>
             </div>
-        </div>
-        
-        <div class="container">
-            <div class="vertical-center">
-                <a href="#" (click)="exibirPerfil()" class="btn btn-outline-primary">Exibir perfil</a>
-                <a href="#" (click)="ocultarPerfil()" class="btn btn-outline-danger">Ocultar perfil</a>
+
+            <div *ngFor="let certification of lista">
+                <div class="alert alert-primary" role="alert">
+                    {{certification.cert}} - {{certification.year}}
+                </div>
             </div>
+
         </div>
+        <a href="#" (click)="exibirPerfil()" class="btn btn-outline-primary">Exibir perfil</a>
+        <a href="#" (click)="ocultarPerfil()" class="btn btn-outline-danger">Ocultar perfil</a>
     </div>
 </body>
