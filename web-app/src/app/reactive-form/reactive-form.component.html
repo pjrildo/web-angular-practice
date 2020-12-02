@@ -1,18 +1,68 @@
-<form [formGroup]="formCadastro" (ngSubmit)="enviar()">
-    <div class="form-group">
-        <label for="campoNome">Nome</label>
-        <input type="text" formControlName="nome" id="campoNome" class="form-control" placeholder="Insira seu nome" />
-    </div>
-    <div class="form-group">
-        <label for="campoTelefone">Telefone</label>
-        <input type="text" formControlName="telefone" id="campoTelefone" class="form-control" aria-describedby="telefoneAviso" placeholder="Insira seu telefone" />
-        <small id="telefoneAviso" class="form-text text-muted">Não enviaremos SMS para seu número</small>
-    </div>
-    <div class="form-group">
-        <label for="campoEmail">Email</label>
-        <input type="email" formControlName="email" id="campoEmail" class="form-control" placeholder="Insira seu email" />
-    </div>
+<form [formGroup]="formRegister" class="needs-validation" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <legend>Informações pessoais</legend>
+        <div class="form-group">
+            <label for="nameField">Nome</label>
+            <input type="text" formControlName="name" id="nameField" class="form-control" placeholder="Nome" [class.is-invalid]="(formRegister.get('name').touched || formRegister.get('name').dirty) && formRegister.get('name').invalid" />
+            <div *ngIf="f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Nome requerido</div>
+                <div *ngIf="f.name.errors.minlength">O nome deve ter pelo menos 5 caracteres</div>
+                <div *ngIf="f.name.errors.maxlength">O nome deve ter no máximo 50 caracteres</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cpfField">CPF</label>
+            <input type="text" formControlName="cpf" id="cpfField" class="form-control" placeholder="CPF" [class.is-invalid]="(formRegister.get('cpf').touched || formRegister.get('cpf').dirty) && formRegister.get('cpf').invalid"/>
+            <div *ngIf="f.cpf.errors" class="invalid-feedback">
+                <div *ngIf="f.cpf.errors.required">CPF requerido</div>
+                <div *ngIf="f.cpf.errors.pattern">CPF inválido</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ageField">Idade</label>
+            <input type="number" formControlName="age" id="ageField" class="form-control" placeholder="Idade" [class.is-invalid]="(formRegister.get('age').touched || formRegister.get('age').dirty) && formRegister.get('age').invalid"/>
+            <div *ngIf="f.age.errors" class="invalid-feedback">
+                <div *ngIf="f.age.errors.required">Idade requerida</div>
+                <div *ngIf="f.age.errors.min">Deve ser maior de idade</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phoneField">Telefone</label>
+            <input type="text" formControlName="phone" id="phoneField" class="form-control" aria-describedby="phoneWarning" placeholder="Telefone" [class.is-invalid]="(formRegister.get('phone').touched || formRegister.get('phone').dirty) && formRegister.get('phone').invalid"/>
+            <small id="phoneWarning" class="form-text text-muted">Não enviaremos SMS para seu número</small>
+            <div *ngIf="f.phone.errors" class="invalid-feedback">
+                <div *ngIf="f.phone.errors.required">Telefone requerido</div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Dados de usuário</legend>
+        <div class="form-group">
+            <label for="emailField">Email</label>
+            <input type="email" formControlName="email" id="emailField" class="form-control" placeholder="Email" [class.is-invalid]="(formRegister.get('email').touched || formRegister.get('email').dirty) && formRegister.get('email').invalid"/>
+            <div *ngIf="f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email requerido</div>
+                <div *ngIf="f.email.errors.email">Email inválido</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="passwordField">Senha</label>
+            <input type="password" formControlName="password" id="passwordField" class="form-control" placeholder="Senha" [class.is-invalid]="(formRegister.get('password').touched || formRegister.get('password').dirty) && formRegister.get('password').invalid"/>
+            <div *ngIf="f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Senha requerida</div>
+                <div *ngIf="f.password.errors.minlength">A senha deve ter pelo menos 8 caracteres</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPasswordField">Confirmar senha</label>
+            <input type="password" formControlName="confirmPassword" id="confirmPasswordField" class="form-control" placeholder="Confirme sua senha" [class.is-invalid]="(formRegister.get('confirmPassword').touched || formRegister.get('confirmPassword').dirty) && formRegister.get('confirmPassword').invalid"/>
+            <div *ngIf="f.confirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="f.confirmPassword.errors.required">Confirmar senha requerida</div>
+                <div *ngIf="f.confirmPassword.errors.mustMatch">As senhas devem corresponder</div>
+            </div>
+        </div>
+    </fieldset>
     <div>
-        <button type="submit" class="btn btn-primary" [disabled]="formCadastro.invalid">Enviar</button>
+        <button type="submit" class="btn btn-primary" [hidden]="formRegister.invalid">Enviar</button>
     </div>
 </form>
